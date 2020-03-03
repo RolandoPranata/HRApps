@@ -79,7 +79,7 @@ class _SplashScreenState extends State<SplashScreen> {
           heightFactor: 50,
           widthFactor: 50,
         ),
-        backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+        backgroundColor: Colors.white,
       ),
     );
   }

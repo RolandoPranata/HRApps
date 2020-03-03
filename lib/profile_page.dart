@@ -104,8 +104,8 @@ class ProfilePage extends StatelessWidget {
                                 margin: EdgeInsets.only(bottom: 20),
                               child: Material(
                                 elevation: 5,
-                                borderRadius: BorderRadius.circular(30),
-                                color: Colors.blueAccent,
+                                borderRadius: BorderRadius.circular(20),
+                                color: Color(0xffff3030),
                                 child: MaterialButton(
                                   minWidth: MediaQuery.of(context).size.width,
                                   padding: EdgeInsets.fromLTRB(20, 10, 20, 10),

@@ -10,6 +10,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   TextStyle style = TextStyle(fontFamily: 'Poppins', fontSize: 20);
+  bool monval = false;
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +56,8 @@ class _LoginPageState extends State<LoginPage> {
 
     final loginButon = Material(
       elevation: 5,
-      borderRadius: BorderRadius.circular(30),
-      color: Colors.blueAccent,
+      borderRadius: BorderRadius.circular(20),
+      color: Color(0xffff3030),
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
@@ -71,6 +72,15 @@ class _LoginPageState extends State<LoginPage> {
             style: style.copyWith(
                 color: Colors.white, fontWeight: FontWeight.bold)),
       ),
+    );
+
+    final checkbox = Checkbox(
+      value: monval,
+      onChanged: (bool value) {
+        setState(() {
+          monval = value;
+        });
+      },
     );
 
     final forgotLabel = FlatButton(
@@ -90,11 +100,28 @@ class _LoginPageState extends State<LoginPage> {
           padding: EdgeInsets.only(left: 24, right: 24),
           children: <Widget>[
             logo,
-            SizedBox(height: 48),
+            SizedBox(height: 50),
             email,
-            SizedBox(height: 48),
+            SizedBox(height: 50),
             password,
-            SizedBox(height: 24),
+            SizedBox(height: 30),
+             Container(
+              child: Row(
+                children: <Widget>[
+                  checkbox,
+                  Container(
+                      child: new Text(
+                    "Remember me",
+                    style: TextStyle(
+                      fontFamily: "Montserrat",
+                      fontSize: 14,
+                      color: Color(0xff000000),
+                    ),
+                  )),
+                ],
+              ),
+            ),
+            SizedBox(height: 35),
             loginButon,
             forgotLabel
           ],

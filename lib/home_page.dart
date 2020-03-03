@@ -59,32 +59,43 @@ class _HomePage extends State<HomePage> {
                   right: 16.0,
                 ),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     SizedBox(height: 32.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        new Text(
-                          "Oliver Ragfelt\nBeginner Programmer",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontFamily: "Montserrat",
-                            fontWeight: FontWeight.w700,
-                            fontSize: 20,
-                            color: Color(0xff000000),
+                        Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                "Rolando Pranata",
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontFamily: "Raleway",
+                                    fontWeight: FontWeight.w900),
+                              ),
+                              Text(
+                                "Junior Programmer",
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  fontFamily: "Montserrat",
+                                  fontSize: 14,
+                                  color: Color(0xff000000),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        // new Text(
-                        //   "Beginner Programmer",
-                        //   textAlign: TextAlign.left,
-                        //   style: TextStyle(
-                        //     fontFamily: "Montserrat",
-                        //     fontSize: 14,
-                        //     color: Color(0xff000000),
-                        //   ),
-                        // ),
-                        Image.asset('images/useraccount.png', height: 50.0),
+                        Image.asset(
+                          "images/userImage.png",
+                          width: 60,
+                          height: 60,
+                        ),
                       ],
                     ),
                     SizedBox(
@@ -213,18 +224,19 @@ class _HomePage extends State<HomePage> {
                               },
                               child: Center(
                                 child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: <Widget>[
-                                      Image.asset(
-                                        'images/clock.png',
-                                        height: 30.0,
-                                      ),
-                                      SizedBox(height: 10.0),
-                                      Text(
-                                        "Absensi",
-                                        style: text14bold,
-                                      ),
-                                    ]),
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    Image.asset(
+                                      'images/clock.png',
+                                      height: 30.0,
+                                    ),
+                                    SizedBox(height: 10.0),
+                                    Text(
+                                      "Absensi",
+                                      style: text14bold,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             shape: RoundedRectangleBorder(
@@ -496,6 +508,9 @@ class _HomePage extends State<HomePage> {
                       ),
                     ),
                   ],
-                ))));
-  }
-}
+                ),
+              ),
+            ),
+          );
+        }
+      }
