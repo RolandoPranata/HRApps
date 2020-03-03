@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:hr_project/Page/absensi_page.dart';
-import 'package:hr_project/Page/cuti_page.dart';
-import 'package:hr_project/Page/izin_page.dart';
 import 'package:hr_project/Page/remote_page.dart';
-import 'package:hr_project/Page/sakit_page.dart';
+import 'package:hr_project/Page/permission_page.dart';
+import 'package:hr_project/Page/sick_page.dart';
+import 'package:hr_project/Page/leave_page.dart';
 
 class HomePage extends StatefulWidget {
   static var tag;
@@ -117,7 +117,7 @@ class _HomePage extends State<HomePage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => CutiPage()),
+                                      builder: (context) => LeavePage()),
                                 );
                               },
                               child: Center(
@@ -149,7 +149,7 @@ class _HomePage extends State<HomePage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => IzinPage()),
+                                      builder: (context) => PermissionPage()),
                                 );
                               },
                               child: Center(
@@ -184,7 +184,7 @@ class _HomePage extends State<HomePage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => SakitPage()),
+                                      builder: (context) => SickPage()),
                                 );
                               },
                               child: Center(
