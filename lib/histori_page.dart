@@ -10,14 +10,7 @@ class HistoriPage extends StatefulWidget {
 }
 
 class _HistoriPageState extends State<HistoriPage> {
-  List _date = [
-    "Tanggal",
-    "1",
-    "2",
-    "3",
-    "4",
-    "5"
-  ];
+  List _date = ["Tanggal", "1", "2", "3", "4", "5"];
 
   List _month = [
     "Bulan",
@@ -61,11 +54,11 @@ class _HistoriPageState extends State<HistoriPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             Container(
-              padding: EdgeInsets.only(right: 20, left: 20, top: 50),
+              padding: EdgeInsets.only(right: 25, left: 25, top: 50),
               child: Row(
                 children: <Widget>[
                   new Text(
@@ -81,7 +74,7 @@ class _HistoriPageState extends State<HistoriPage> {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(top: 50, left: 20, right: 20),
+              margin: EdgeInsets.only(top: 50, left: 20, right: 20, bottom: 50),
               height: 432.00,
               width: 330.00,
               decoration: BoxDecoration(
@@ -97,21 +90,28 @@ class _HistoriPageState extends State<HistoriPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     Container(
-                      alignment: Alignment.topCenter,
-                        margin: EdgeInsets.only(right: 10),
+                        alignment: Alignment.topCenter,
+                        margin: EdgeInsets.only(right: 50),
                         child: DropdownButton(
+                          icon: Icon(Icons.arrow_drop_down_circle, size: 15, color: Colors.black,),
                           value: _dates,
                           items: _dropDownMenuItemsDate,
                           onChanged: changedDropDownItemDates,
-                        )),
+                        ),
+                      ),
                     Container(
-                      alignment: Alignment.topCenter,
-                      margin: EdgeInsets.only(left: 10),
-                      child: DropdownButton(
-                      value: _months,
-                      items: _dropDownMenuItemsMonth,
-                      onChanged: changedDropDownItemMonths,
-                    )),
+                        alignment: Alignment.topCenter,
+                        margin: EdgeInsets.only(left: 10),
+                        // padding: EdgeInsets.only(top: 10),
+                        // height: 50,
+                        // color: Color(0xffffffff),
+                        child: DropdownButton(
+                          icon: Icon(Icons.arrow_drop_down_circle, size: 15, color: Colors.black,),
+                          value: _months,
+                          items: _dropDownMenuItemsMonth,
+                          onChanged: changedDropDownItemMonths,
+                        ),
+                      ),
                   ],
                 ),
               ),
@@ -128,7 +128,7 @@ class _HistoriPageState extends State<HistoriPage> {
     });
   }
 
-   void changedDropDownItemMonths(String selectedMonth) {
+  void changedDropDownItemMonths(String selectedMonth) {
     setState(() {
       _months = selectedMonth;
     });

@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:hr_project/Page/absensi_page.dart';
-import 'package:hr_project/Page/cuti_page.dart';
-import 'package:hr_project/Page/izin_page.dart';
+import 'package:hr_project/Page/leave_page.dart';
+import 'package:hr_project/Page/permission_page.dart';
 import 'package:hr_project/Page/remote_page.dart';
-import 'package:hr_project/Page/sakit_page.dart';
+import 'package:hr_project/Page/sick_page.dart';
 import 'package:hr_project/bottom_bar.dart';
 import 'package:hr_project/histori_page.dart';
 import 'package:hr_project/home_page.dart';
@@ -19,10 +19,10 @@ final route = <String, WidgetBuilder>{
   ProfilePage.tag: (context) => ProfilePage(),
   BottomBar.tag: (context) => BottomBar(),
   AbsensiPage.tag: (context) => AbsensiPage(),
-  CutiPage.tag: (context) =>CutiPage(),
-  IzinPage.tag: (context) => IzinPage(),
+  LeavePage.tag: (context) =>LeavePage(),
+  PermissionPage.tag: (context) => PermissionPage(),
   RemotePage.tag: (context) => RemotePage(),
-  SakitPage.tag: (context) => SakitPage(),
+  SickPage.tag: (context) => SickPage(),
 };
 
 void main() {
@@ -79,7 +79,7 @@ class _SplashScreenState extends State<SplashScreen> {
           heightFactor: 50,
           widthFactor: 50,
         ),
-        backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+        backgroundColor: Colors.white,
       ),
     );
   }
