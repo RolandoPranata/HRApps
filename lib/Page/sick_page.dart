@@ -1,202 +1,298 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:hr_project/bottom_bar.dart';
+
+
+import 'dart:async';
 import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 class SickPage extends StatefulWidget {
   static var tag;
 
-  final String title = "Flutter Pick Image demo";
-
-  SickPage({Key key}) : super(key: key);
-
   @override
-  _SakitPageState createState() => _SakitPageState();
+  _SickPageState createState() => _SickPageState();
 }
 
-class _SakitPageState extends State<SickPage> {
-  TextStyle style = TextStyle(fontFamily: 'Poppins', fontSize: 20);
-  Future<File> imageFile;
-
-  pickImageFromGallery(ImageSource source) {
+class _SickPageState extends State<SickPage> {
+  File image;
+  Future getImage() async {
+    File picture = await ImagePicker.pickImage(source: ImageSource.gallery);
     setState(() {
-      imageFile = ImagePicker.pickImage(source: source);
+      image = picture;
     });
   }
 
-  Widget showImage() {
-    return FutureBuilder<File>(
-      future: imageFile,
-      builder: (BuildContext context, AsyncSnapshot<File> snapshot) {
-        if (snapshot.connectionState == ConnectionState.done &&
-            snapshot.data != null) {
-          return Image.file(
-            snapshot.data,
-            width: 300,
-            height: 300,
-          );
-        } else if (snapshot.error != null) {
-          return const Text(
-            'Error Picking Image',
-            textAlign: TextAlign.center,
-          );
-        } else {
-          return const Text(
-            'No Image Selected',
-            textAlign: TextAlign.center,
-          );
-        }
-      },
-    );
-  }
+  TextStyle textwhiteStyle = TextStyle(
+    fontFamily: 'Poppins',
+    fontSize: 18.0,
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+  );
+
+  TextStyle text22bold = TextStyle(
+    fontFamily: 'Poppins',
+    fontSize: 22.0,
+    fontWeight: FontWeight.bold,
+  );
+
+  TextStyle text18bold = TextStyle(
+    fontFamily: 'Poppins',
+    fontSize: 18.0,
+    fontWeight: FontWeight.bold,
+  );
+
+  TextStyle text16bold = TextStyle(
+    fontFamily: 'Poppins',
+    fontSize: 16.0,
+    fontWeight: FontWeight.bold,
+  );
+
+  TextStyle text16 = TextStyle(
+    fontFamily: 'Poppins',
+    fontSize: 16.0,
+  );
+
+  TextStyle text14bold = TextStyle(
+    fontFamily: 'Poppins',
+    fontSize: 14.0,
+    fontWeight: FontWeight.bold,
+  );
+
+  TextStyle text14 = TextStyle(
+    fontFamily: 'Poppins',
+    fontSize: 14.0,
+  );
+
+  TextStyle text12 = TextStyle(
+    fontFamily: 'Poppins',
+    fontSize: 12.0,
+  );
+
+  DateTime _dateTimestar, _dateTimeend;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.only(left: 25, right: 25, top: 10),
-          child: SingleChildScrollView(
-            child: Container(
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      backgroundColor: Color(0xffFFFFFF),
+      body: SingleChildScrollView(
+        child: SafeArea(
+            top: true,
+            bottom: true,
+            left: true,
+            right: true,
+            minimum: const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+            ),
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: 32.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      child: Icon(
+                        Icons.keyboard_backspace,
+                        color: Colors.black,
+                      ),
+                    ),
+                    Container(
+                      width: 280.0,
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Sakit',
+                        textAlign: TextAlign.center,
+                        style: text16bold,
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(height: 32),
+                Container(
+                  height: 530.00,
+                  width: double.maxFinite,
+                  padding: EdgeInsets.all(16.0),
+                  decoration: BoxDecoration(
+                    color: Color(0xfff4f4f4),
+                    borderRadius: BorderRadius.circular(15.00),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Icon(Icons.arrow_back, color: Colors.black),
-                      new Text(
-                        "Sakit",
-                        style: TextStyle(
-                          fontFamily: "Montserrat",
-                          fontWeight: FontWeight.w700,
-                          fontSize: 20,
-                          color: Color(0xff000000),
+                      Text(
+                        'Pengajuan Sakit',
+                        style: text16bold,
+                      ),
+                      SizedBox(
+                        height: 32.0,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            "Tanggal Mulai",
+                            style: text14bold,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(
+                                _dateTimestar == null
+                                    ? ''
+                                    : _dateTimestar.toString(),
+                                style: text14,
+                              ),
+                              Container(
+                                  width: 44.0,
+                                  child: FlatButton(
+                                    child: Icon(
+                                      Icons.calendar_today,
+                                      color: Colors.black,
+                                    ),
+                                    onPressed: () {
+                                      showDatePicker(
+                                              context: context,
+                                              initialDate: _dateTimestar == null
+                                                  ? DateTime.now()
+                                                  : _dateTimestar,
+                                              firstDate: DateTime(2015),
+                                              lastDate: DateTime(2100))
+                                          .then((date) {
+                                        setState(() {
+                                          _dateTimestar = date;
+                                        });
+                                      });
+                                    },
+                                  ))
+                            ],
+                          ),
+                          Divider(height: 1.0, color: Colors.black)
+                        ],
+                      ),
+                      SizedBox(
+                        height: 16.0,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            "Tanggal Berakhir",
+                            style: text14bold,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(
+                                _dateTimeend == null
+                                    ? ''
+                                    : _dateTimeend.toString(),
+                                style: text14,
+                              ),
+                              Container(
+                                  width: 44.0,
+                                  child: FlatButton(
+                                    child: Icon(
+                                      Icons.calendar_today,
+                                      color: Colors.black,
+                                    ),
+                                    onPressed: () {
+                                      showDatePicker(
+                                              context: context,
+                                              initialDate: _dateTimeend == null
+                                                  ? _dateTimestar
+                                                  : _dateTimeend,
+                                              firstDate: DateTime(2020),
+                                              lastDate: DateTime(2030))
+                                          .then((date) {
+                                        setState(() {
+                                          _dateTimeend = date;
+                                        });
+                                      });
+                                    },
+                                  ))
+                            ],
+                          ),
+                          Divider(height: 1.0, color: Colors.black)
+                        ],
+                      ),
+                      SizedBox(
+                        height: 16.0,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            "Upload Surat Dokter",
+                            style: text14bold,
+                          ),
+                          SizedBox(
+                            height: 16.0,
+                          ),
+                          Container(
+                              height: 125.00,
+                              width: double.maxFinite,
+                              //padding: EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                color: Color(0xffffffff),
+                                borderRadius: BorderRadius.circular(13.00),
+                              ),
+                              child: Stack(
+                                children: <Widget>[
+                                  Container(
+                                    height: double.maxFinite,
+                                      width: double.maxFinite,
+                                      decoration: BoxDecoration(
+                                        color: Color(0xffffffff),
+                                        borderRadius:
+                                            BorderRadius.circular(13.00),
+                                      ),
+                                      child: image == null
+                                          ? Text('')
+                                          : Image.file(image, fit: BoxFit.cover,)),
+                                  Center(
+                                    child: FlatButton(
+                                        onPressed: getImage,
+                                        child: Image.asset(
+                                          'images/upload.png',
+                                          height: 50.0,
+                                        )),
+                                  ),
+                                ],
+                              ))
+                        ],
+                      ),
+                      SizedBox(
+                        height: 32.0,
+                      ),
+                      Material(
+                        elevation: 2.0,
+                        borderRadius: BorderRadius.circular(15.0),
+                        color: Color(0xffFF3030),
+                        child: MaterialButton(
+                          minWidth: MediaQuery.of(context).size.width,
+                          padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                          onPressed: () {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(builder: (_) {
+                                return BottomBar();
+                              }),
+                            );
+                          },
+                          child: Text(
+                            'Ajukan Izin Sakit',
+                            textAlign: TextAlign.center,
+                            style: textwhiteStyle,
+                          ),
                         ),
                       ),
                     ],
                   ),
-                  Container(
-                    padding: EdgeInsets.only(right: 25, left: 25, top: 10),
-                    margin: EdgeInsets.only(top: 50, left: 20, right: 20),
-                    height: 700.00,
-                    width: 330.00,
-                    decoration: BoxDecoration(
-                      color: Color(0xfff4f4f4),
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15.00),
-                        topRight: Radius.circular(15.00),
-                        bottomLeft: Radius.circular(15.00),
-                        bottomRight: Radius.circular(15.00),
-                      ),
-                    ),
-                    child: Container(
-                      padding: EdgeInsets.only(right: 10, left: 10, top: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Container(
-                            margin: EdgeInsets.only(bottom: 10),
-                            child: Text(
-                              "Pengajuan izin sakit",
-                              style: TextStyle(
-                                fontFamily: "Montserrat",
-                                fontWeight: FontWeight.w700,
-                                fontSize: 18,
-                                color: Color(0xff000000),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: 20),
-                            child: Text(
-                              "Tanggal Mulai",
-                              style: TextStyle(
-                                fontFamily: "Montserrat",
-                                fontSize: 18,
-                                color: Color(0xff000000),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            child: TextField(
-                              decoration: new InputDecoration(
-                                  prefixIcon: const Icon(
-                                    Icons.date_range,
-                                    color: Color(0xff707070),
-                                  ),
-                                  suffixStyle:
-                                      const TextStyle(color: Colors.green)),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: 20),
-                            child: Text(
-                              "Tanggal Berakhir",
-                              style: TextStyle(
-                                fontFamily: "Montserrat",
-                                fontSize: 18,
-                                color: Color(0xff000000),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            child: TextField(
-                              decoration: new InputDecoration(
-                                  prefixIcon: const Icon(
-                                    Icons.date_range,
-                                    color: Color(0xff707070),
-                                  ),
-                                  suffixStyle:
-                                      const TextStyle(color: Colors.green)),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: 20),
-                            child: Column(
-                              children: <Widget>[
-                                showImage(),
-                                RaisedButton(
-                                  child: Text("Select Image from Gallery"),
-                                  onPressed: () {
-                                    pickImageFromGallery(ImageSource.gallery);
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: 30),
-                            child: Material(
-                              elevation: 5,
-                              borderRadius: BorderRadius.circular(20),
-                              color: Color(0xffff3030),
-                              child: MaterialButton(
-                                minWidth: MediaQuery.of(context).size.width,
-                                padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                                onPressed: () {
-                                  // Navigator.pushReplacement(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (BuildContext context) => BottomBar()));
-                                },
-                                child: Text("Ajukan izin sakit",
-                                    textAlign: TextAlign.center,
-                                    style: style.copyWith(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 14)),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
+                ),
+                SizedBox(
+                  height: 32.0,
+                )
+              ],
+            )),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hr_project/bottom_bar.dart';
 
 class LeavePage extends StatefulWidget {
   static var tag;
@@ -11,6 +12,26 @@ class LeavePage extends StatefulWidget {
 
 class _CutiPageState extends State<LeavePage> {
   TextStyle style = TextStyle(fontFamily: 'Poppins', fontSize: 20);
+
+   TextStyle textwhiteStyle = TextStyle(
+    fontFamily: 'Montserrat',
+    fontSize: 18.0,
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+  );
+
+  TextStyle text14bold = TextStyle(
+    fontFamily: 'Montserrat',
+    fontSize: 14.0,
+    fontWeight: FontWeight.bold,
+  );
+
+  TextStyle text14 = TextStyle(
+    fontFamily: 'Montserrat',
+    fontSize: 14.0,
+  );
+
+  DateTime _dateTimestar, _dateTimeend;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +40,7 @@ class _CutiPageState extends State<LeavePage> {
           child: Column(
             children: <Widget>[
               Container(
-                padding: EdgeInsets.only(right: 25, left: 25, top: 50),
+                padding: EdgeInsets.only(right: 16, left: 16, top: 50),
                 child: Row(
                   children: <Widget>[
                     Container(
@@ -47,8 +68,8 @@ class _CutiPageState extends State<LeavePage> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(right: 25, left: 25, top: 10),
-                margin: EdgeInsets.only(top: 50, left: 20, right: 20),
+                padding: EdgeInsets.only(right: 16, left: 16, top: 10),
+                margin: EdgeInsets.only(top: 50, left: 16, right: 16),
                 height: 185.00,
                 width: 330.00,
                 decoration: BoxDecoration(
@@ -157,7 +178,7 @@ class _CutiPageState extends State<LeavePage> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(right: 25, left: 25, top: 10),
+                padding: EdgeInsets.only(right: 10, left: 10, top: 10),
                 margin:
                     EdgeInsets.only(top: 50, left: 20, right: 20, bottom: 50),
                 height: 550.00,
@@ -189,48 +210,94 @@ class _CutiPageState extends State<LeavePage> {
                           ),
                         ),
                       ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            "Tanggal Mulai",
+                            style: text14bold,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(
+                                _dateTimestar == null
+                                    ? ''
+                                    : _dateTimestar.toString(),
+                                style: text14,
+                              ),
+                              Container(
+                                  width: 44.0,
+                                  child: FlatButton(
+                                    child: Icon(
+                                      Icons.calendar_today,
+                                      color: Colors.black,
+                                    ),
+                                    onPressed: () {
+                                      showDatePicker(
+                                              context: context,
+                                              initialDate: _dateTimestar == null
+                                                  ? DateTime.now()
+                                                  : _dateTimestar,
+                                              firstDate: DateTime(2015),
+                                              lastDate: DateTime(2030))
+                                          .then((date) {
+                                        setState(() {
+                                          _dateTimestar = date;
+                                        });
+                                      });
+                                    },
+                                  ))
+                            ],
+                          ),
+                          Divider(height: 1.0, color: Colors.black)
+                        ],
+                      ),
                       Container(
                         margin: EdgeInsets.only(top: 20),
-                        child: Text(
-                          "Tanggal Mulai",
-                          style: TextStyle(
-                            fontFamily: "Montserrat",
-                            fontSize: 18,
-                            color: Color(0xff000000),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        child: TextField(
-                          decoration: new InputDecoration(
-                              prefixIcon: const Icon(
-                                Icons.date_range,
-                                color: Color(0xff707070),
-                              ),
-                              suffixStyle:
-                                  const TextStyle(color: Colors.green)),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 20),
-                        child: Text(
-                          "Tanggal Berakhir",
-                          style: TextStyle(
-                            fontFamily: "Montserrat",
-                            fontSize: 18,
-                            color: Color(0xff000000),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        child: TextField(
-                          decoration: new InputDecoration(
-                              prefixIcon: const Icon(
-                                Icons.date_range,
-                                color: Color(0xff707070),
-                              ),
-                              suffixStyle:
-                                  const TextStyle(color: Colors.green)),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              "Tanggal Berakhir",
+                              style: text14bold,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text(
+                                  _dateTimeend == null
+                                      ? ''
+                                      : _dateTimeend.toString(),
+                                  style: text14,
+                                ),
+                                Container(
+                                    width: 44.0,
+                                    child: FlatButton(
+                                      child: Icon(
+                                        Icons.calendar_today,
+                                        color: Colors.black,
+                                      ),
+                                      onPressed: () {
+                                        showDatePicker(
+                                                context: context,
+                                                initialDate:
+                                                    _dateTimeend == null
+                                                        ? _dateTimestar
+                                                        : _dateTimeend,
+                                                firstDate: DateTime(2015),
+                                                lastDate: DateTime(2030))
+                                            .then((date) {
+                                          setState(() {
+                                            _dateTimeend = date;
+                                          });
+                                        });
+                                      },
+                                    ))
+                              ],
+                            ),
+                            Divider(height: 1.0, color: Colors.black)
+                          ],
                         ),
                       ),
                       Container(
@@ -255,27 +322,25 @@ class _CutiPageState extends State<LeavePage> {
                           ),
                         ),
                       ),
-                      Container(
-                        margin: EdgeInsets.only(top: 30),
-                        child: Material(
-                          elevation: 5,
-                          borderRadius: BorderRadius.circular(20),
-                          color: Color(0xffff3030),
-                          child: MaterialButton(
-                            minWidth: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                            onPressed: () {
-                              // Navigator.pushReplacement(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (BuildContext context) => BottomBar()));
-                            },
-                            child: Text("Ajukan Cuti",
-                                textAlign: TextAlign.center,
-                                style: style.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14)),
+                      SizedBox(height: 32),
+                      Material(
+                        elevation: 2.0,
+                        borderRadius: BorderRadius.circular(15.0),
+                        color: Color(0xffFF3030),
+                        child: MaterialButton(
+                          minWidth: MediaQuery.of(context).size.width,
+                          padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                          onPressed: () {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(builder: (_) {
+                                return BottomBar();
+                              }),
+                            );
+                          },
+                          child: Text(
+                            'Ajukan Izin',
+                            textAlign: TextAlign.center,
+                            style: textwhiteStyle,
                           ),
                         ),
                       ),
